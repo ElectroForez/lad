@@ -1,0 +1,40 @@
+<meta charset="utf-8">
+<head>
+	<title>RPG-battle</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<div id="main">
+    <table id="battleTable" onmousedown="return false">
+        <tr>
+            <th>
+                <table id='mageMoves' class="MovesTable">    
+                </table>
+            </th>
+            <th id="middleTH">
+        	<table id="charactersInfo" class="charactersInfo">
+               <tr id="imagesCharacter">
+                <th><img src="mage.jpg"></th>
+                <th id="turns">;</th>
+                <th><img src="monster.jpg"></th>
+               </tr>
+               <tr id="namesCharacter">
+                <td>Маг Естафий</td>
+                <td></td>
+                <td>Монстр</td>
+              </tr>
+            </table>
+            </th>
+        
+        <th>
+        <table id='monsterMoves' class="MovesTable">    
+        </table>
+        </th>
+        </table> 
+        </tr>        
+    </table>
+    <span id="results"></span>
+    </div>
+<script src="characters.js"></script>
+<script src="main.js"></script>
+</body>
