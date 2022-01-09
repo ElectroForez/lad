@@ -13,10 +13,10 @@ function askCorrectNumber(text="", default_value="1", asStr=false) {
             results.innerHTML = 'Вы не ввели начальное здоровье';
             throw new Error('Отмена ввода пользователем');
         }
-        if (isFinite(number) && number != '') {
+        if (isFinite(number) && +number) {
             break;
         } else {
-            alert('Некорректное число');
+            alert('Некорректное здоровье');
         }
     }
     if (asStr) return number.trim(); //trim для обрезки пробелов в начале и конце
@@ -137,21 +137,30 @@ function Game() {
         monster.moves[this.monsterMoveNum].cooldownReload = monster.moves[this.monsterMoveNum].cooldown + 1;
     }
 
-    function checkEnd() {//проверяем не конец ли игры
+    this.checkEnd = function () {//проверяем не конец ли игры
+        let end = false;
         if(mage.currentHealth <= 0 && monster.currentHealth <= 0) {
             results.innerHTML = 'Все погибли!';
             mageHealth.style.color = 'red';
             monsterHealth.style.color = 'red';
-            return true
+            end = true;
         } else if (mage.currentHealth <= 0) {
             results.innerHTML = `${mage.name} пал смертью храбрых`;
             mageHealth.style.color = 'red';
-            return true
+            end = true;
         } else if (monster.currentHealth <= 0) {
             results.innerHTML = `${monster.name} был повержен`;
             monsterHealth.style.color = 'red';
-            return true
+            end = true;
         }
+        if (end) {
+         let button = document.createElement('button');
+         button.textContent = 'Сыграть ещё раз';
+         button.onclick = () => {button.remove(); this.startGame.call(this)};
+         main.append(button);
+
+     }
+     return end;
     }
 
 
@@ -181,7 +190,7 @@ function Game() {
             updateCooldownReload(monster, -1);
             updateHealth();
             updateMovesCharacters();
-            if (checkEnd()) {
+            if (this.checkEnd()) {
                 mageMoves.removeEventListener('click', this.mainLogic);
                 return;
             }
