@@ -13,7 +13,7 @@ function askCorrectNumber(text="", default_value="1", asStr=false) {
             results.innerHTML = 'Вы не ввели начальное здоровье';
             throw new Error('Отмена ввода пользователем');
         }
-        if (isFinite(number) && +number) {
+        if (isFinite(number) && +number > 0) {
             break;
         } else {
             alert('Некорректное здоровье');
